@@ -2,8 +2,8 @@ import type { CriteriaSection, CriterionDefinition, CriterionKey, RadioGroupKey 
 
 export const CRITERIA_SECTIONS: CriteriaSection[] = [
   {
-    id: 'company',
-    title: 'Situation de l\'entreprise',
+    id: 'ca',
+    title: 'Chiffre d\'affaires',
     criteria: [
       {
         key: 'ca_gt_1m',
@@ -20,10 +20,12 @@ export const CRITERIA_SECTIONS: CriteriaSection[] = [
         label: 'CA annuel de 500 000 € ou moins',
         radioGroup: 'ca_bracket',
       },
-      {
-        key: 'currently_insured',
-        label: 'Entreprise actuellement assurée pour les activités concernées',
-      },
+    ],
+  },
+  {
+    id: 'company_age',
+    title: 'Ancienneté de l\'entreprise',
+    criteria: [
       {
         key: 'company_lt_6m',
         label: 'Entreprise créée il y a moins de 6 mois',
@@ -39,17 +41,16 @@ export const CRITERIA_SECTIONS: CriteriaSection[] = [
         label: 'Entreprise créée il y a plus de 3 ans',
         radioGroup: 'company_age',
       },
-      {
-        key: 'company_closed',
-        label: 'Ancienne entreprise fermée exerçant les mêmes activités',
-        radioGroup: 'company_age',
-      },
     ],
   },
   {
     id: 'insurance_history',
     title: 'Antécédents d\'assurance',
     criteria: [
+      {
+        key: 'currently_insured',
+        label: 'Entreprise actuellement assurée pour les activités concernées',
+      },
       {
         key: 'insurance_6m_5y',
         label: 'Assurée ≥ 6 mois sur les 5 dernières années (même entreprise, mêmes activités)',
