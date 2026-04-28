@@ -3,6 +3,24 @@ import type { ProfileId } from '../types/questionnaire';
 
 const PARTIAL_THRESHOLD = 2; // <= N manquants = 'partial'
 
+// Groupes radio : sélectionner un membre exclut les autres
+const RADIO_GROUPS: CriterionKey[][] = [
+  ['ca_gt_1m', 'ca_500k_1m', 'ca_lte_500k'],
+  ['company_lt_6m', 'company_6m_3y', 'company_gt_3y', 'company_closed'],
+];
+
+/** Retourne les critères rendus impossibles par les sélections radio courantes */
+function getExcludedCriteria(checked: Set<CriterionKey>): Set<CriterionKey> {
+  const excluded = new Set<CriterionKey>();
+  for (const group of RADIO_GROUPS) {
+    const selected = group.find(m => checked.has(m));
+    if (selected) {
+      group.filter(m => m !== selected).forEach(m => excluded.add(m));
+    }
+  }
+  return excluded;
+}
+
 export const ELIGIBILITY_RULES: ProfileRule[] = [
   // ── Profils simples (required) ─────────────────────────────────────────────
   {
@@ -82,7 +100,9 @@ export const ELIGIBILITY_RULES: ProfileRule[] = [
 
 // ── Moteur d'éligibilité ──────────────────────────────────────────────────────
 
-function evaluateVariant(variant: RuleVariant, checked: Set<CriterionKey>): CriterionKey[] {
+function evaluateVariant(variant: RuleVariant, checked: Set<CriterionKey>, excluded: Set<CriterionKey>): CriterionKey[] | null {
+  // Si un critère requis est explicitement exclu (radio group), ce variant est impossible
+  if (variant.required.some(k => excluded.has(k))) return null;
   return variant.required.filter(k => !checked.has(k));
 }
 
@@ -90,8 +110,15 @@ export function computeProfileEligibility(
   rule: ProfileRule,
   checked: Set<CriterionKey>
 ): ProfileEligibility {
+  const excluded = getExcludedCriteria(checked);
+
   // Cas simple : tous les critères required
   if (rule.required) {
+    // Si un critère requis est exclu → unreachable immédiatement
+    const blockedBy = rule.required.filter(k => excluded.has(k));
+    if (blockedBy.length > 0) {
+      return { profileId: rule.profileId, status: 'unreachable', missingCriteria: blockedBy };
+    }
     const missing = rule.required.filter(k => !checked.has(k));
     const status: EligibilityStatus =
       missing.length === 0
@@ -102,19 +129,19 @@ export function computeProfileEligibility(
     return { profileId: rule.profileId, status, missingCriteria: missing };
   }
 
-  // Cas variants : chercher le meilleur (moins de manquants)
-  const evaluated = (rule.variants ?? []).map(v => ({
-    variant: v,
-    missing: evaluateVariant(v, checked),
-  }));
+  // Cas variants : ne garder que les variants compatibles (aucun critère exclu)
+  const evaluated = (rule.variants ?? [])
+    .map(v => ({ variant: v, missing: evaluateVariant(v, checked, excluded) }))
+    .filter((e): e is { variant: RuleVariant; missing: CriterionKey[] } => e.missing !== null);
+
+  // Si tous les variants sont bloqués → unreachable
+  if (evaluated.length === 0) {
+    return { profileId: rule.profileId, status: 'unreachable', missingCriteria: [] };
+  }
 
   // Trier par nombre de manquants croissant
   evaluated.sort((a, b) => a.missing.length - b.missing.length);
   const best = evaluated[0];
-
-  if (!best) {
-    return { profileId: rule.profileId, status: 'unreachable', missingCriteria: [] };
-  }
 
   if (best.missing.length === 0) {
     return {
