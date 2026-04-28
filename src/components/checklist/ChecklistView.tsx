@@ -24,9 +24,9 @@ export function ChecklistView() {
       <div className="flex flex-1 gap-0">
 
         {/* ── Colonne gauche : critères ────────────────────────────────────── */}
-        <div className="w-[340px] shrink-0 border-r border-gray-200 flex flex-col">
+        <div className="w-[300px] shrink-0 bg-[#F7F7FB] border-r border-gray-200 flex flex-col">
           {/* En-tête */}
-          <div className="px-6 py-5 border-b border-gray-100">
+          <div className="px-6 py-5 border-b border-gray-200">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-xs font-bold text-gray-900">Vos critères</p>
@@ -62,7 +62,7 @@ export function ChecklistView() {
           </div>
 
           {/* Sections */}
-          <div className="flex-1 overflow-y-auto px-5 py-5 flex flex-col gap-5">
+          <div className="flex-1 overflow-y-auto px-5 py-4 flex flex-col gap-4">
             {CRITERIA_SECTIONS.map(section => (
               <CriteriaSection
                 key={section.id}
