@@ -54,7 +54,6 @@ export const decisionTree: DecisionTree = {
     type: 'question',
     id: 'q4_exp_pioupiou',
     question: 'Avez-vous une expérience personnelle d\'au moins 1 an dans les 5 dernières années dans les activités demandées ?',
-    hint: 'En tant que salarié ou dirigeant dans les mêmes activités.',
     options: [
       { label: 'Oui', value: 'oui', next: { result: 'pioupiou' } },
       { label: 'Non', value: 'non', next: 'q4a_corbeau_young' },
@@ -123,7 +122,6 @@ export const decisionTree: DecisionTree = {
     type: 'question',
     id: 'q6b_exp_coq',
     question: 'Avez-vous une expérience personnelle d\'au moins 1 an dans les 5 dernières années dans les activités demandées ?',
-    hint: 'En tant que salarié ou dirigeant dans les mêmes activités.',
     options: [
       { label: 'Oui', value: 'oui', next: { result: 'coq' } },
       { label: 'Non', value: 'non', next: { result: 'no_match' } },
@@ -161,7 +159,6 @@ export const decisionTree: DecisionTree = {
     type: 'question',
     id: 'q10_exp_poussin',
     question: 'Avez-vous une expérience personnelle d\'au moins 1 an dans les 5 dernières années dans les activités demandées ?',
-    hint: 'En tant que salarié ou dirigeant dans les mêmes activités.',
     options: [
       { label: 'Oui', value: 'oui', next: { result: 'poussin' } },
       { label: 'Non', value: 'non', next: 'q13_apprentissage' },
