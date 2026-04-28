@@ -53,6 +53,7 @@ export interface ProfileRule {
   profileId: ProfileId;
   required?: CriterionKey[];
   variants?: RuleVariant[];
+  forbidden?: CriterionKey[]; // si l'un de ces critères est coché → unreachable
 }
 
 export type ChecklistState = Set<CriterionKey>;

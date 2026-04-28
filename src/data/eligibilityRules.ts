@@ -60,6 +60,7 @@ export const ELIGIBILITY_RULES: ProfileRule[] = [
   // ── Profils avec variants (OU sur l'âge de l'entreprise) ──────────────────
   {
     profileId: 'poussin',
+    forbidden: ['insurance_6m_5y'],
     variants: [
       {
         label: 'Entreprise 6 mois – 3 ans',
@@ -73,6 +74,7 @@ export const ELIGIBILITY_RULES: ProfileRule[] = [
   },
   {
     profileId: 'poussin_sans_facture',
+    forbidden: ['insurance_6m_5y'],
     variants: [
       {
         label: 'Entreprise 6 mois – 3 ans',
@@ -86,6 +88,7 @@ export const ELIGIBILITY_RULES: ProfileRule[] = [
   },
   {
     profileId: 'maxi_poussin',
+    forbidden: ['insurance_6m_5y'],
     variants: [
       {
         label: 'Activités standards — 6 mois–3 ans',
@@ -120,6 +123,11 @@ export function computeProfileEligibility(
   checked: Set<CriterionKey>
 ): ProfileEligibility {
   const excluded = getExcludedCriteria(checked);
+
+  // Critères interdits : si l'un est coché → unreachable immédiatement
+  if (rule.forbidden?.some(k => checked.has(k))) {
+    return { profileId: rule.profileId, status: 'unreachable', missingCriteria: [] };
+  }
 
   // Cas simple : tous les critères required
   if (rule.required) {
