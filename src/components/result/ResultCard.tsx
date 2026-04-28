@@ -19,7 +19,7 @@ export function ResultCard({ profile, onReset }: Props) {
           <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest">Résultat</p>
           <h1 className="text-2xl font-bold text-gray-800">Entreprise non assurable</h1>
           <p className="text-sm text-gray-400 leading-relaxed max-w-xs mx-auto mt-1">
-            D'après vos réponses, votre dossier ne remplit pas les critères d'éligibilité. Contactez directement un conseiller.
+            D'après vos réponses, votre dossier ne remplit pas les critères d'éligibilité. Essayez un autre profil ou demandez conseil à votre Enabler.
           </p>
         </div>
         <button
