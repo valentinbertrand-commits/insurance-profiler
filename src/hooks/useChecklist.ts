@@ -19,13 +19,13 @@ export function useChecklist() {
     });
   };
 
-  // Sélection exclusive (pour les radio groups)
+  // Sélection exclusive (pour les radio groups) — reclique = décocher
   const selectRadio = (groupKey: RadioGroupKey, key: CriterionKey) => {
     const members = getRadioGroupMembers(groupKey);
     setChecked(prev => {
       const next = new Set(prev);
       members.forEach(k => next.delete(k));
-      next.add(key);
+      if (!prev.has(key)) next.add(key); // reclique sur le même → décocher
       return next;
     });
   };
