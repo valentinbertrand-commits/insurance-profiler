@@ -28,7 +28,7 @@ export function EligibilityBoard({ eligibilities, eligibleCount, partialCount, u
       </div>
 
       {/* Grille */}
-      <div className="grid grid-cols-3 gap-3">
+      <div className="grid grid-cols-2 gap-3">
         {eligibilities.map(e => (
           <ProfileStatusCard key={e.profileId} eligibility={e} />
         ))}
