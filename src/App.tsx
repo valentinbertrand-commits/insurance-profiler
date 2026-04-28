@@ -1,10 +1,16 @@
+import { useState } from 'react';
 import { useQuestionnaire } from './hooks/useQuestionnaire';
 import { getProfile } from './data/profiles';
 import { ProgressBar } from './components/questionnaire/ProgressBar';
 import { QuestionCard } from './components/questionnaire/QuestionCard';
 import { ResultCard } from './components/result/ResultCard';
+import { ChecklistView } from './components/checklist/ChecklistView';
+
+type AppMode = 'questionnaire' | 'checklist';
 
 export default function App() {
+  const [mode, setMode] = useState<AppMode>('questionnaire');
+
   const { currentNode, canGoBack, progressPercent, stepNumber, answer, goBack, reset } =
     useQuestionnaire();
 
@@ -24,68 +30,95 @@ export default function App() {
           </svg>
         </div>
         <span className="text-sm font-semibold text-gray-800">Profil de souscription</span>
+
+        {/* Mode toggle */}
+        <div className="ml-auto flex items-center gap-1 bg-gray-100 rounded-xl p-1">
+          <button
+            onClick={() => setMode('questionnaire')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer
+              ${mode === 'questionnaire'
+                ? 'bg-white text-gray-800 shadow-sm'
+                : 'text-gray-400 hover:text-gray-600'}`}
+          >
+            Questionnaire
+          </button>
+          <button
+            onClick={() => setMode('checklist')}
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 cursor-pointer
+              ${mode === 'checklist'
+                ? 'bg-white text-gray-800 shadow-sm'
+                : 'text-gray-400 hover:text-gray-600'}`}
+          >
+            Checklist
+          </button>
+        </div>
       </header>
 
       {/* Main */}
-      <main className="flex-1 flex items-center justify-center px-8 py-14">
-        <div className="w-full max-w-4xl">
+      <main className={`flex-1 flex px-8 py-10 ${mode === 'questionnaire' ? 'items-center justify-center' : 'items-start justify-center'}`}>
+        <div className={`w-full ${mode === 'checklist' ? 'max-w-6xl' : 'max-w-4xl'}`}>
 
-          {/* Card */}
-          <div
-            className="bg-white rounded-3xl flex flex-col items-center"
-            style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.04), 0 16px 48px rgba(123,111,232,0.10)' }}
-          >
-            {/* Contenu centré dans la card */}
-            <div className="w-full max-w-2xl">
-            {/* Progress */}
-            {!isResult && (
-              <div className="px-10 pt-9 pb-0">
-                <ProgressBar percent={progressPercent} step={stepNumber} />
-              </div>
-            )}
-
-            {/* Divider */}
-            {!isResult && <div className="mx-10 mt-7 border-t border-gray-100" />}
-
-            {/* Content */}
-            <div className={isResult ? 'px-12 py-14' : 'px-10 py-9'}>
-              {isResult ? (
-                <ResultCard
-                  profile={getProfile(
-                    currentNode.type === 'result' ? currentNode.profile : 'no_match'
+          {mode === 'checklist' ? (
+            <ChecklistView />
+          ) : (
+            <>
+              {/* Card questionnaire */}
+              <div
+                className="bg-white rounded-3xl flex flex-col items-center"
+                style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.04), 0 16px 48px rgba(123,111,232,0.10)' }}
+              >
+                <div className="w-full max-w-2xl">
+                  {/* Progress */}
+                  {!isResult && (
+                    <div className="px-10 pt-9 pb-0">
+                      <ProgressBar percent={progressPercent} step={stepNumber} />
+                    </div>
                   )}
-                  onReset={reset}
-                />
-              ) : (
-                currentNode.type === 'question' && (
-                  <QuestionCard node={currentNode} onAnswer={answer} />
-                )
-              )}
-            </div>
 
-            {/* Back button */}
-            {!isResult && (
-              <div className="px-10 pb-9 pt-0 border-t border-gray-100">
-                <button
-                  onClick={goBack}
-                  disabled={!canGoBack}
-                  className="flex items-center gap-1.5 text-xs font-medium text-gray-400 transition-colors duration-150 disabled:opacity-25 disabled:cursor-not-allowed hover:text-[#7B6FE8] cursor-pointer mt-6"
-                >
-                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                  Question précédente
-                </button>
+                  {/* Divider */}
+                  {!isResult && <div className="mx-10 mt-7 border-t border-gray-100" />}
+
+                  {/* Content */}
+                  <div className={isResult ? 'px-12 py-14' : 'px-10 py-9'}>
+                    {isResult ? (
+                      <ResultCard
+                        profile={getProfile(
+                          currentNode.type === 'result' ? currentNode.profile : 'no_match'
+                        )}
+                        onReset={reset}
+                      />
+                    ) : (
+                      currentNode.type === 'question' && (
+                        <QuestionCard node={currentNode} onAnswer={answer} />
+                      )
+                    )}
+                  </div>
+
+                  {/* Back button */}
+                  {!isResult && (
+                    <div className="px-10 pb-9 pt-0 border-t border-gray-100">
+                      <button
+                        onClick={goBack}
+                        disabled={!canGoBack}
+                        className="flex items-center gap-1.5 text-xs font-medium text-gray-400 transition-colors duration-150 disabled:opacity-25 disabled:cursor-not-allowed hover:text-[#7B6FE8] cursor-pointer mt-6"
+                      >
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                        Question précédente
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
-            )}
-            </div>{/* fin max-w-2xl */}
-          </div>
 
-          {/* Footer hint */}
-          {!isResult && (
-            <p className="text-center text-xs text-gray-400 mt-5 animate-fade">
-              Répondez aux questions pour obtenir votre profil de souscription
-            </p>
+              {/* Footer hint */}
+              {!isResult && (
+                <p className="text-center text-xs text-gray-400 mt-5 animate-fade">
+                  Répondez aux questions pour obtenir votre profil de souscription
+                </p>
+              )}
+            </>
           )}
         </div>
       </main>
