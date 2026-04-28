@@ -6,7 +6,7 @@ const PARTIAL_THRESHOLD = 2; // <= N manquants = 'partial'
 // Groupes radio : sélectionner un membre exclut les autres
 const RADIO_GROUPS: CriterionKey[][] = [
   ['ca_gt_1m', 'ca_500k_1m', 'ca_lte_500k'],
-  ['company_lt_6m', 'company_6m_3y', 'company_gt_3y', 'company_closed'],
+  ['company_lt_6m', 'company_6m_3y', 'company_gt_3y'],
 ];
 
 /** Retourne les critères rendus impossibles par les sélections radio courantes */
@@ -50,7 +50,7 @@ export const ELIGIBILITY_RULES: ProfileRule[] = [
   },
   {
     profileId: 'corbeau',
-    required: ['ca_lte_500k', 'company_closed', 'old_co_insured_1y', 'has_5_invoices_old_co'],
+    required: ['ca_lte_500k', 'company_lt_6m', 'old_co_insured_1y', 'has_5_invoices_old_co'],
   },
   {
     profileId: 'pioupiou',
