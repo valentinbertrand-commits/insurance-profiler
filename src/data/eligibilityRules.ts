@@ -33,19 +33,19 @@ export const ELIGIBILITY_RULES: ProfileRule[] = [
   },
   {
     profileId: 'aigle',
-    required: ['company_gt_3y', 'insurance_6m_5y'],
+    required: ['ca_lte_500k', 'company_gt_3y', 'insurance_6m_5y'],
   },
   {
     profileId: 'coq',
-    required: ['company_6m_3y', 'insurance_6m_5y', 'has_5_invoices_12m', 'exp_1y_5y'],
+    required: ['ca_lte_500k', 'company_6m_3y', 'insurance_6m_5y', 'has_5_invoices_12m', 'exp_1y_5y'],
   },
   {
     profileId: 'corbeau',
-    required: ['company_closed', 'old_co_insured_1y', 'has_5_invoices_old_co'],
+    required: ['ca_lte_500k', 'company_closed', 'old_co_insured_1y', 'has_5_invoices_old_co'],
   },
   {
     profileId: 'pioupiou',
-    required: ['company_lt_6m', 'exp_1y_5y'],
+    required: ['ca_lte_500k', 'company_lt_6m', 'exp_1y_5y'],
   },
 
   // ── Profils avec variants (OU sur l'âge de l'entreprise) ──────────────────
@@ -54,11 +54,11 @@ export const ELIGIBILITY_RULES: ProfileRule[] = [
     variants: [
       {
         label: 'Entreprise 6 mois – 3 ans',
-        required: ['company_6m_3y', 'has_5_invoices_12m', 'exp_1y_5y'],
+        required: ['ca_lte_500k', 'company_6m_3y', 'has_5_invoices_12m', 'exp_1y_5y'],
       },
       {
         label: 'Entreprise > 3 ans',
-        required: ['company_gt_3y', 'has_5_invoices_12m', 'exp_1y_5y'],
+        required: ['ca_lte_500k', 'company_gt_3y', 'has_5_invoices_12m', 'exp_1y_5y'],
       },
     ],
   },
@@ -67,11 +67,11 @@ export const ELIGIBILITY_RULES: ProfileRule[] = [
     variants: [
       {
         label: 'Entreprise 6 mois – 3 ans',
-        required: ['company_6m_3y', 'has_diploma', 'exp_3y_1y5y'],
+        required: ['ca_lte_500k', 'company_6m_3y', 'has_diploma', 'exp_3y_1y5y'],
       },
       {
         label: 'Entreprise > 3 ans',
-        required: ['company_gt_3y', 'has_diploma', 'exp_3y_1y5y'],
+        required: ['ca_lte_500k', 'company_gt_3y', 'has_diploma', 'exp_3y_1y5y'],
       },
     ],
   },
@@ -80,19 +80,19 @@ export const ELIGIBILITY_RULES: ProfileRule[] = [
     variants: [
       {
         label: 'Activités standards — 6 mois–3 ans',
-        required: ['company_6m_3y', 'diploma_apprentice', 'exp_1y_10y'],
+        required: ['ca_lte_500k', 'company_6m_3y', 'diploma_apprentice', 'exp_1y_10y'],
       },
       {
         label: 'Activités standards — > 3 ans',
-        required: ['company_gt_3y', 'diploma_apprentice', 'exp_1y_10y'],
+        required: ['ca_lte_500k', 'company_gt_3y', 'diploma_apprentice', 'exp_1y_10y'],
       },
       {
         label: 'Activités spéciales — 6 mois–3 ans',
-        required: ['company_6m_3y', 'diploma_apprentice', 'has_special_activity', 'exp_2y_10y'],
+        required: ['ca_lte_500k', 'company_6m_3y', 'diploma_apprentice', 'has_special_activity', 'exp_2y_10y'],
       },
       {
         label: 'Activités spéciales — > 3 ans',
-        required: ['company_gt_3y', 'diploma_apprentice', 'has_special_activity', 'exp_2y_10y'],
+        required: ['ca_lte_500k', 'company_gt_3y', 'diploma_apprentice', 'has_special_activity', 'exp_2y_10y'],
       },
     ],
   },
