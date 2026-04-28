@@ -10,9 +10,8 @@ interface Props {
 export function CriteriaSection({ section, checked, onChange }: Props) {
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex items-center gap-2 px-1">
-        <span className="w-1 h-3 rounded-full bg-[#C4BEFF] inline-block" />
-        <p className="text-[11px] font-bold uppercase tracking-wider text-gray-400">
+      <div className="pb-1.5 border-b border-gray-200">
+        <p className="text-xs font-bold text-gray-900">
           {section.title}
         </p>
       </div>
