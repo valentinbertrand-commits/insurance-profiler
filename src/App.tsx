@@ -17,9 +17,9 @@ export default function App() {
   const isResult = currentNode.type === 'result';
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ backgroundColor: '#EBEBF5' }}>
+    <div className="h-screen flex flex-col overflow-hidden" style={{ backgroundColor: '#EBEBF5' }}>
       {/* Header */}
-      <header className="bg-white border-b border-gray-100 px-10 py-4 flex items-center gap-3">
+      <header className="shrink-0 bg-white border-b border-gray-100 px-10 py-4 flex items-center gap-3">
         <div
           className="w-8 h-8 rounded-lg flex items-center justify-center"
           style={{ backgroundColor: '#7B6FE8' }}
@@ -55,19 +55,20 @@ export default function App() {
       </header>
 
       {/* Main */}
-      <main className={`flex-1 flex px-8 py-10 ${mode === 'questionnaire' ? 'items-center justify-center' : 'items-start justify-center'}`}>
-        <div className={`w-full ${mode === 'checklist' ? 'max-w-6xl' : 'max-w-4xl'}`}>
+      <main className="flex-1 flex overflow-hidden px-6 py-6 justify-center">
+        <div className={`w-full flex flex-col ${mode === 'checklist' ? 'max-w-7xl' : 'max-w-5xl'}`}>
 
           {mode === 'checklist' ? (
+            /* ChecklistView s'étire sur toute la hauteur disponible */
             <ChecklistView />
           ) : (
-            <>
-              {/* Card questionnaire */}
+            /* Mode questionnaire : card pleine hauteur + contenu centré */
+            <div className="flex-1 flex flex-col">
               <div
-                className="bg-white rounded-3xl flex flex-col items-center"
+                className="flex-1 bg-white rounded-3xl flex flex-col items-center justify-center"
                 style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.04), 0 16px 48px rgba(123,111,232,0.10)' }}
               >
-                <div className="w-full max-w-2xl">
+                <div className="w-full max-w-3xl flex flex-col">
                   {/* Progress */}
                   {!isResult && (
                     <div className="px-10 pt-9 pb-0">
@@ -114,11 +115,11 @@ export default function App() {
 
               {/* Footer hint */}
               {!isResult && (
-                <p className="text-center text-xs text-gray-400 mt-5 animate-fade">
+                <p className="text-center text-xs text-gray-400 mt-4 animate-fade">
                   Répondez aux questions pour obtenir votre profil de souscription
                 </p>
               )}
-            </>
+            </div>
           )}
         </div>
       </main>
