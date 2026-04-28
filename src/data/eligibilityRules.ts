@@ -29,7 +29,16 @@ export const ELIGIBILITY_RULES: ProfileRule[] = [
   },
   {
     profileId: 'condor',
-    required: ['ca_500k_1m', 'currently_insured'],
+    variants: [
+      {
+        label: 'Entreprise 6 mois – 3 ans',
+        required: ['ca_500k_1m', 'currently_insured', 'company_6m_3y'],
+      },
+      {
+        label: 'Entreprise > 3 ans',
+        required: ['ca_500k_1m', 'currently_insured', 'company_gt_3y'],
+      },
+    ],
   },
   {
     profileId: 'aigle',
