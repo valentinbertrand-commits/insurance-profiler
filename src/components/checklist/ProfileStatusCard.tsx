@@ -13,20 +13,14 @@ export function ProfileStatusCard({ eligibility }: Props) {
   // ── Éligible ────────────────────────────────────────────────────────────────
   if (status === 'eligible') {
     return (
-      <div
-        className="rounded-lg p-2.5 flex flex-col gap-1.5 transition-all duration-300"
-        style={{ backgroundColor: profile.bgColor, border: `1.5px solid ${profile.color}22` }}
-      >
-        <span
-          className="inline-flex items-center gap-1 text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full self-start"
-          style={{ backgroundColor: profile.color + '18', color: profile.color }}
-        >
+      <div className="rounded-lg p-2.5 flex flex-col gap-1.5 transition-all duration-300 bg-emerald-50 border border-emerald-200">
+        <span className="inline-flex items-center gap-1 text-[8px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full self-start bg-emerald-100 text-emerald-700">
           <svg className="w-1.5 h-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
           </svg>
           Éligible
         </span>
-        <p className="text-xs font-bold leading-tight" style={{ color: profile.color }}>
+        <p className="text-xs font-bold leading-tight text-emerald-800">
           {profile.name}
         </p>
       </div>
