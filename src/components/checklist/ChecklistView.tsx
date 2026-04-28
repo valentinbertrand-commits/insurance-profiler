@@ -21,7 +21,7 @@ export function ChecklistView() {
       className="bg-white rounded-3xl overflow-hidden flex-1 flex flex-col"
       style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.04), 0 16px 48px rgba(123,111,232,0.10)' }}
     >
-      <div className="flex flex-1 gap-[120px]">
+      <div className="flex flex-1 gap-[120px] pl-20">
 
         {/* ── Colonne gauche : critères ────────────────────────────────────── */}
         <div className="w-[300px] shrink-0 bg-[#F7F7FB] rounded-2xl flex flex-col">
