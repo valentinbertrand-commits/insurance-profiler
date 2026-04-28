@@ -18,7 +18,7 @@ export function ChecklistView() {
 
   return (
     <div
-      className="bg-white rounded-3xl flex-1 flex flex-col"
+      className="bg-white rounded-3xl overflow-hidden flex-1 flex flex-col"
       style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.04), 0 16px 48px rgba(123,111,232,0.10)' }}
     >
       <div className="flex flex-1" style={{ gap: '120px', padding: '24px 64px' }}>
