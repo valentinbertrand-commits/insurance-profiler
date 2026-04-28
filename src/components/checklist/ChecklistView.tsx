@@ -21,16 +21,16 @@ export function ChecklistView() {
       className="bg-white rounded-3xl overflow-hidden flex-1 flex flex-col"
       style={{ boxShadow: '0 2px 4px rgba(0,0,0,0.04), 0 16px 48px rgba(123,111,232,0.10)' }}
     >
-      <div className="flex flex-1">
+      <div className="flex flex-1 divide-x divide-gray-100 gap-0">
 
         {/* ── Colonne gauche : critères ────────────────────────────────────── */}
-        <div className="w-[380px] shrink-0 border-r border-gray-100 flex flex-col">
+        <div className="w-[320px] shrink-0 border-r border-gray-100 flex flex-col">
           {/* En-tête */}
-          <div className="px-7 py-6 border-b border-gray-100">
+          <div className="px-5 py-4 border-b border-gray-100">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-bold text-gray-900">Vos critères</p>
-                <p className="text-xs text-gray-400 mt-0.5">
+                <p className="text-xs font-bold text-gray-900">Vos critères</p>
+                <p className="text-[11px] text-gray-400 mt-0.5">
                   Cochez tout ce que vous possédez
                 </p>
               </div>
@@ -62,7 +62,7 @@ export function ChecklistView() {
           </div>
 
           {/* Sections */}
-          <div className="flex-1 overflow-y-auto px-5 py-5 flex flex-col gap-5">
+          <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4">
             {CRITERIA_SECTIONS.map(section => (
               <CriteriaSection
                 key={section.id}
@@ -77,9 +77,9 @@ export function ChecklistView() {
         {/* ── Colonne droite : résultats ───────────────────────────────────── */}
         <div className="flex-1 flex flex-col min-w-0">
           {/* En-tête */}
-          <div className="px-8 py-6 border-b border-gray-100">
-            <p className="text-sm font-bold text-gray-900">Profils correspondants</p>
-            <p className="text-xs text-gray-400 mt-0.5">
+          <div className="px-7 py-4 border-b border-gray-100">
+            <p className="text-xs font-bold text-gray-900">Profils correspondants</p>
+            <p className="text-[11px] text-gray-400 mt-0.5">
               {checked.size === 0
                 ? 'Commencez à cocher des critères pour voir votre éligibilité'
                 : 'Mis à jour en temps réel'}
@@ -87,7 +87,7 @@ export function ChecklistView() {
           </div>
 
           {/* Board */}
-          <div className="flex-1 overflow-y-auto px-8 py-7">
+          <div className="flex-1 overflow-y-auto px-7 py-5">
             <EligibilityBoard
               eligibilities={eligibilities}
               eligibleCount={eligibleCount}

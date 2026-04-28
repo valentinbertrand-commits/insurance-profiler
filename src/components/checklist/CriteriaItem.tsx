@@ -14,7 +14,7 @@ export function CriteriaItem({ criterion, isChecked, onChange }: Props) {
       role={isRadio ? 'radio' : 'checkbox'}
       aria-checked={isChecked}
       onClick={() => onChange(criterion.key, criterion.radioGroup)}
-      className={`w-full text-left flex items-center gap-3 px-4 py-3 rounded-xl border transition-all duration-150 cursor-pointer
+      className={`w-full text-left flex items-center gap-2.5 px-3 py-2.5 rounded-lg border transition-all duration-150 cursor-pointer
         ${isChecked
           ? 'border-[#7B6FE8] bg-[#F5F3FF]'
           : 'border-gray-200 bg-white hover:border-[#C4BEFF] hover:bg-gray-50/80'
@@ -36,7 +36,7 @@ export function CriteriaItem({ criterion, isChecked, onChange }: Props) {
 
       {/* Texte */}
       <span className="flex-1">
-        <span className={`block text-sm leading-snug transition-colors duration-150
+        <span className={`block text-xs leading-snug transition-colors duration-150
           ${isChecked ? 'text-[#4C3DB5] font-medium' : 'text-gray-700 font-normal'}`}
         >
           {criterion.label}
