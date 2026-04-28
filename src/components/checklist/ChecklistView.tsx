@@ -80,20 +80,29 @@ export function ChecklistView() {
           <div className="px-10 py-5 border-b border-gray-100">
             <p className="text-xs font-bold text-gray-900">Profils correspondants</p>
             <p className="text-[11px] text-gray-400 mt-0.5">
-              {checked.size === 0
-                ? 'Commencez à cocher des critères pour voir votre éligibilité'
+              {checked.size < 2
+                ? 'Cochez au moins 2 critères pour voir votre éligibilité'
                 : 'Mis à jour en temps réel'}
             </p>
           </div>
 
           {/* Board */}
           <div className="flex-1 overflow-y-auto px-10 py-7">
-            <EligibilityBoard
-              eligibilities={eligibilities}
-              eligibleCount={eligibleCount}
-              partialCount={partialCount}
-              unreachableCount={unreachableCount}
-            />
+            {checked.size < 2 ? (
+              <div className="flex flex-col items-center justify-center h-full gap-3 text-center">
+                <span className="text-3xl">☑️</span>
+                <p className="text-sm font-medium text-gray-400">
+                  Cochez au moins 2 critères pour voir vos profils
+                </p>
+              </div>
+            ) : (
+              <EligibilityBoard
+                eligibilities={eligibilities}
+                eligibleCount={eligibleCount}
+                partialCount={partialCount}
+                unreachableCount={unreachableCount}
+              />
+            )}
           </div>
         </div>
       </div>
