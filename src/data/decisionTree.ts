@@ -99,7 +99,7 @@ export const decisionTree: DecisionTree = {
   q5_ant_6m: {
     type: 'question',
     id: 'q5_ant_6m',
-    question: 'Votre entreprise a-t-elle été assurée au moins 6 mois d'affilée sur les 5 dernières années, pour les mêmes activités ?',
+    question: 'Votre entreprise a-t-elle été assurée au moins 6 mois d\'affilée sur les 5 dernières années, pour les mêmes activités ?',
     options: [
       { label: 'Oui', value: 'oui', next: 'q6_fac_coq' },
       { label: 'Non', value: 'non', next: 'q9_fac_shared' },
@@ -134,7 +134,7 @@ export const decisionTree: DecisionTree = {
   q7_ant_3y: {
     type: 'question',
     id: 'q7_ant_3y',
-    question: 'Votre entreprise a-t-elle été assurée au moins 6 mois d'affilée sur les 5 dernières années, pour les mêmes activités ?',
+    question: 'Votre entreprise a-t-elle été assurée au moins 6 mois d\'affilée sur les 5 dernières années, pour les mêmes activités ?',
     options: [
       { label: 'Oui', value: 'oui', next: { result: 'aigle' } },
       { label: 'Non', value: 'non', next: 'q9_fac_shared' },
