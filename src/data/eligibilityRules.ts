@@ -50,7 +50,7 @@ export const ELIGIBILITY_RULES: ProfileRule[] = [
   },
   {
     profileId: 'corbeau',
-    required: ['ca_lte_500k', 'company_lt_6m', 'old_co_insured_1y', 'has_5_invoices_old_co'],
+    required: ['ca_lte_500k', 'old_co_insured_1y', 'has_5_invoices_old_co'],
   },
   {
     profileId: 'pioupiou',
