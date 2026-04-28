@@ -53,7 +53,7 @@ export const CRITERIA_SECTIONS: CriteriaSection[] = [
       },
       {
         key: 'insurance_6m_5y',
-        label: 'Assurée ≥ 6 mois sur les 5 dernières années (même entreprise, mêmes activités)',
+        label: 'Assurée ≥ 6 mois d\'affilée sur les 5 dernières années, pour les mêmes activités',
       },
       {
         key: 'old_co_insured_1y',
